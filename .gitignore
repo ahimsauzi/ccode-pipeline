@@ -1,0 +1,10 @@
+.env
+.DS_Store
+.claude/*
+!.claude/skills/
+!.claude/agents/
+__pycache__/
+*.pyc
+.venv/
+tools/diagrams/output/
+.seed-check.log

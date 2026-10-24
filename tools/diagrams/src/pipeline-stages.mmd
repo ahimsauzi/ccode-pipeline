@@ -1,0 +1,8 @@
+flowchart LR
+    S0["Stage 0\nSeed\n1-3 sentences"] --> S1["Stage 1\nResearch Brief\nVera + Lead Dev"]
+    S1 --> S2["Stage 2\nProduct Spec\nReva"]
+    S2 --> S3["Stage 3\nArchitecture Spike\nLead Dev"]
+    S3 --> S4{"Stage 4\nGO / NO-GO\nOwner"}
+    S4 -->|GO| BUILD["Build Phase\nMarcus activates"]
+    S4 -->|PARK| PARK["Parked\nrevisit trigger defined"]
+    S4 -->|KILL| KILL["Killed"]

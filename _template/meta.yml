@@ -1,0 +1,8 @@
+name: "{exploration-name}"
+slug: "{exploration-name}"
+status: stage-0-seed
+current_stage: 0
+created_at: "YYYY-MM-DD"
+active_agents:
+  - Lead Dev
+tags: []

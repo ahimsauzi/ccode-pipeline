@@ -1,0 +1,20 @@
+sequenceDiagram
+    participant U as User
+    participant B as Browser
+    participant C as Client App
+    participant A as Auth Server
+
+    C->>C: Generate code_verifier + code_challenge (SHA-256)
+    C->>B: Redirect to /authorize
+    B->>A: GET /authorize with code_challenge and state
+    A->>B: Login page
+    U->>B: Submit credentials
+    B->>A: POST credentials
+    A->>B: 302 redirect with authorization code
+    B->>C: GET /callback with code and state
+    C->>C: Verify state, retrieve code_verifier
+    C->>A: POST /token with code + code_verifier (back channel)
+    A->>A: Hash verifier, compare to stored challenge
+    A->>C: access_token
+    C->>A: POST /introspect with token (back channel)
+    A->>C: active, scope, sub, expiry
