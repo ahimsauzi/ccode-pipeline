@@ -128,7 +128,7 @@ When an exploration reaches Stage 4 GO, the build repo is created as a **separat
 
 **Archival rule:** once GO'd and the build repo exists, move the exploration folder out of the active list — from `~/Code/ACTIVE/AI/explorations/{name}/` to `~/Code/ACTIVE/AI/explorations/built/{name}/`. This keeps the root of `AI/explorations/` showing only in-flight (pre-GO) explorations; `built/` is the frozen planning-artifact archive. Move it as-is (it's often its own git clone of the build repo's remote — don't push from it after archiving, and strip or leave the remote as convenient, just don't treat it as a working copy).
 
-**ethanon-app install checklist (add to every new build repo at GO):**
+**ethanon-app install checklist (add to every new build repo at GO; full version in `docs/build-phase.md`):**
 - [ ] `.claude/settings.json` with full agent tool permissions (least-privilege tool allowlist per agent)
 - [ ] `pr-review.yml` `allowed_bots` includes `claude[bot]`
 - [ ] `meta.yml` updated with `build_repo` path and `kit_subdirectory`
@@ -137,13 +137,13 @@ When an exploration reaches Stage 4 GO, the build repo is created as a **separat
 
 ## Build Platform
 
-When an exploration reaches Stage 4 GO, **developer.ai ethanon-app** is brought in as the build agency. Think of it as a third-party hire: the pipeline produces the artifacts (research brief, product spec, architecture spike) and hands them off — ethanon-app owns execution from GO to ship.
+When an exploration reaches Stage 4 GO, **ethanon-app** is brought in as the build agency. Think of it as a third-party hire: the pipeline produces the artifacts (research brief, product spec, architecture spike) and hands them off — ethanon-app owns execution from GO to ship.
 
 **Where it sits in the flow:**
 
 ```
 Stage 4 GO (owner approval)
-  → ethanon-app (developer.ai) — agency runs the build
+  → ethanon-app — agency runs the build
       ├── Full build execution, iteration, shipping
       ├── Marcus, Dani, Kai, Felix → observer role
       │     (available for context, domain input if needed)
@@ -167,7 +167,7 @@ Stage 4 GO (owner approval)
 - Pipeline (Stages 0–4): Seed → Research → Spec → Architecture → GO/NO-GO
 - ethanon-app: everything after GO — implementation through ship
 
-**Tooling note:** ethanon-app is forked from [Ethanon](https://github.com/Ethanon) and runs as a cloud platform (developer.ai). It does not appear in `.claude/agents/` and is not managed locally — treat it as an external agency relationship.
+**Tooling note:** ethanon-app is my configured copy of [developer.ai](https://github.com/Ethanon/developer.ai), an MIT-licensed Claude Code agent kit by Ethanon. It is installed into each build repo as `ethanon-app/` at GO, and is not part of this repo's `.claude/agents/`. Install steps and layout: [`docs/build-phase.md`](docs/build-phase.md).
 
 ---
 
