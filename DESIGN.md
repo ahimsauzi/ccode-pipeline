@@ -122,28 +122,25 @@ When an exploration reaches Stage 4 GO, the build repo is created as a **separat
 
 **Enforced by:**
 - All local work (code review, fixes, commits) happens in `~/Code/ACTIVE/{name}/`
-- ethanon-app is installed inside the build repo, not the exploration
+- build-kit is installed inside the build repo, not the exploration
 
 **Why:** Discovered 2026-05-28 when fixes were pushed from the exploration copy instead of the build repo, causing diverged git histories on the same remote. The build repo is the canonical working copy from GO forward.
 
 **Archival rule:** once GO'd and the build repo exists, move the exploration folder out of the active list — from `~/Code/ACTIVE/AI/explorations/{name}/` to `~/Code/ACTIVE/AI/explorations/built/{name}/`. This keeps the root of `AI/explorations/` showing only in-flight (pre-GO) explorations; `built/` is the frozen planning-artifact archive. Move it as-is (it's often its own git clone of the build repo's remote — don't push from it after archiving, and strip or leave the remote as convenient, just don't treat it as a working copy).
 
-**ethanon-app install checklist (add to every new build repo at GO; full version in `docs/build-phase.md`):**
-- [ ] `.claude/settings.json` with full agent tool permissions (least-privilege tool allowlist per agent)
-- [ ] `pr-review.yml` `allowed_bots` includes `claude[bot]`
-- [ ] `meta.yml` updated with `build_repo` path and `kit_subdirectory`
+**build-kit install:** see the checklist in [`docs/build-phase.md`](docs/build-phase.md).
 
 ---
 
 ## Build Platform
 
-When an exploration reaches Stage 4 GO, **ethanon-app** is brought in as the build agency. Think of it as a third-party hire: the pipeline produces the artifacts (research brief, product spec, architecture spike) and hands them off — ethanon-app owns execution from GO to ship.
+When an exploration reaches Stage 4 GO, **build-kit** is brought in as the build agency. Think of it as a third-party hire: the pipeline produces the artifacts (research brief, product spec, architecture spike) and hands them off — build-kit owns execution from GO to ship.
 
 **Where it sits in the flow:**
 
 ```
 Stage 4 GO (owner approval)
-  → ethanon-app — agency runs the build
+  → build-kit — agency runs the build
       ├── Full build execution, iteration, shipping
       ├── Marcus, Dani, Kai, Felix → observer role
       │     (available for context, domain input if needed)
@@ -157,17 +154,17 @@ Stage 4 GO (owner approval)
 
 | Role | During GO→Ship |
 |---|---|
-| ethanon-app | Owns execution — builds, iterates, ships |
+| build-kit | Owns execution — builds, iterates, ships |
 | Lead Dev (Claude) | Oversight, escalation filter, owner interface |
-| Marcus, Dani, Kai, Felix | Observers — consulted if ethanon-app needs domain input |
+| Marcus, Dani, Kai, Felix | Observers — consulted if build-kit needs domain input |
 | Sage | Active — content pipeline continues from build artifacts |
 | Vera, Reva | Passive — pipeline work complete; available if spec needs revision |
 
 **Scope boundary:**
 - Pipeline (Stages 0–4): Seed → Research → Spec → Architecture → GO/NO-GO
-- ethanon-app: everything after GO — implementation through ship
+- build-kit: everything after GO — implementation through ship
 
-**Tooling note:** ethanon-app is my configured copy of [developer.ai](https://github.com/Ethanon/developer.ai), an MIT-licensed Claude Code agent kit by Ethanon. It is installed into each build repo as `ethanon-app/` at GO, and is not part of this repo's `.claude/agents/`. Install steps and layout: [`docs/build-phase.md`](docs/build-phase.md).
+**Tooling note:** build-kit is [developer.ai](https://github.com/Ethanon/developer.ai), an MIT-licensed Claude Code agent kit by Ethanon, imported into [`build-kit/`](build-kit/). It is installed into each build repo at GO, and is not part of this repo's `.claude/agents/`. Install steps and layout: [`docs/build-phase.md`](docs/build-phase.md).
 
 ---
 

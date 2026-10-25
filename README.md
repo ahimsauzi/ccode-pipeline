@@ -66,6 +66,7 @@ decisions/           Stage 4 gate review template
 research/ spec/      Stage 1 and 2 artifacts for this pipeline
 architecture/        Stage 3 spike
 tools/               Diagram generation (mermaid-cli) and headless seed-check
+build-kit/           Build-phase agent kit (developer.ai, imported unmodified, MIT)
 docs/build-phase.md  How the build kit is installed after GO
 DESIGN.md            Full design: squad, stages, graduation rule, remote seed capture
 ```
@@ -75,8 +76,8 @@ DESIGN.md            Full design: squad, stages, graduation rule, remote seed ca
 Requirements: [Claude Code](https://docs.claude.com/en/docs/claude-code), plus `mermaid-cli` if
 you want the diagrams.
 
-Build-phase dependency: [developer.ai](https://github.com/Ethanon/developer.ai), installed into
-each build repo at GO, not into this one. See [`docs/build-phase.md`](docs/build-phase.md).
+The build-phase agent kit is included in [`build-kit/`](build-kit/) and is installed into each
+build repo at GO, not run in this one. See [`docs/build-phase.md`](docs/build-phase.md).
 
 ```bash
 git clone https://github.com/ahimsauzi/ccode-pipeline
@@ -123,9 +124,9 @@ definitions refer to the editorial standard by name, but it is not in this repo.
 
 ## Acknowledgements
 
-The post-GO build phase uses ethanon-app, my configuration of
-[developer.ai](https://github.com/Ethanon/developer.ai) by Ethanon (MIT): its scheduled audit agents,
-developer agent and PR review fleet, installed into each build repo. The idea of a build as a
+`build-kit/` is [developer.ai](https://github.com/Ethanon/developer.ai) by Ethanon (MIT), imported
+unmodified at upstream commit `9b0b070`: its scheduled audit agents, feature agent and PR review
+fleet, installed into each build repo. Changes after the import are mine and are separate commits. The idea of a build as a
 team of narrow specialists also comes from developer.ai.
 
 ## Perspective

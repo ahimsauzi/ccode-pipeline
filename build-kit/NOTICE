@@ -1,0 +1,7 @@
+build-kit/ contains files from developer.ai by James McDuffie (Ethanon),
+https://github.com/Ethanon/developer.ai, imported unmodified at upstream
+commit 9b0b070 (2026-09-06). Those files are licensed under the MIT License
+in build-kit/LICENSE (Copyright (c) 2026 James McDuffie, Dubh'shíth Studios).
+
+The import is a single verbatim commit. Every later change to build-kit/ is a
+separate commit in this repository's history.
